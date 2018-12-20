@@ -1,7 +1,16 @@
-//Select button through DOM
-var button = document.getElementsByTagName("button")[0];
+//Select button, input and ul through DOM
+var button = document.getElementById("enter");
+var input = document.getElementById("userInput");
+var ul = document.querySelector("ul");
 
-//Click button
+//Click button to add more items on list
 button.addEventListener("click", function(){
-  console.log('Clicked!')
+
+  //Create new li element
+  var li = document.createElement("li");
+  //Create text inside li
+  li.appendChild(document.createTextNode("testing"));
+
+  //Append li to ul
+  ul.appendChild(li);
 })
