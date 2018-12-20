@@ -12,32 +12,38 @@ function inputLength() {
 };
 
 
-//Create new li element
+//Create new list item and button
 function createListElement() {
-  var item = document.createElement("li");
-  var btn = document.createElement("button");
+  var li = document.createElement("li");
   //Create text inside li from textbox
-  item.appendChild(document.createTextNode(input.value));
-  //Create Remove button next to list item
-  btn.appendChild(document.createTextNode("Remove"));
-  item.appendChild(btn);
+  li.appendChild(document.createTextNode(input.value));
+  li.addEventListener("click", crossOff);
   //Append li to ul
-  ul.appendChild(item);
+  ul.appendChild(li);
   //Clear textbox
   input.value = "";
 
+  var delBtn = document.createElement("button");
+  delBtn.appendChild(document.createTextNode("Remove"));
+  delBtn.addEventListener("click", removeListItem);
+  //Add button right next to item
+  li.appendChild(delBtn);
 
-  //Click button to delete item
-  for(var i = 0; i < items.length; i++){
-    btn.addEventListener("click", function(){
-      //Select current item
-      this.parentNode.remove();
-  });
+
+
+  //Crosses off list item
+  function crossOff() {
+    li.classList.toggle("done");
   }
+
+  //Deletes list item
+  function removeListItem() {
+    li.remove();
   }
 
+}
 
-function addItemAfterClick(){
+function addItemAfterClick() {
   //Prevent empty list items with condition statement
   if (inputLength() > 0) {
     createListElement();
@@ -45,14 +51,12 @@ function addItemAfterClick(){
 }
 
 
-function addItemAfterEnter(event){
-  //Prevent empty list items with condition statement
-  //And check if Enter was pressed
+function addItemAfterEnter(event) {
+                        //check if Enter was pressed
   if (inputLength() > 0 && event.keyCode === 13) {
     createListElement();
   }
 }
-
 
 
 
@@ -61,16 +65,3 @@ button.addEventListener("click", addItemAfterClick);
 
 //Press Enter to add more items on list
 input.addEventListener("keypress", addItemAfterEnter);
-
-function crossOff(){
-//Cross off completed task
-for(var i = 0; i < items.length; i++){
-  items[i].addEventListener("click", function(){
-    //Crosses off selected item
-    this.classList.toggle("done");
-  })
-}
-}
-
-// DoubleClick to cross off, Doesn't cross off new list items
-// ul.addEventListener("click", crossOff);
