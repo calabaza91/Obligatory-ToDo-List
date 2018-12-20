@@ -8,8 +8,8 @@ button.addEventListener("click", function(){
 
   //Create new li element
   var li = document.createElement("li");
-  //Create text inside li
-  li.appendChild(document.createTextNode("testing"));
+  //Create text inside li from textbox
+  li.appendChild(document.createTextNode(input.value));
 
   //Append li to ul
   ul.appendChild(li);
